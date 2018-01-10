@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import codecs
 import collections
 import sys
-from typing import (Any, Optional, Text, Tuple)  # noqa: F401
+from typing import (Any, Optional, Tuple)  # noqa: F401
 
 from eth_utils import (
     big_endian_to_int,
@@ -85,7 +85,7 @@ class BaseKey(ByteString, collections.Hashable):
     _raw_key = None  # type: bytes
 
     def to_hex(self):
-        # type: () -> Text
+        # type: () -> str
         # Need the 'type: ignore' comment below because of
         # https://github.com/python/typeshed/issues/300
         return '0x' + codecs.decode(codecs.encode(self._raw_key, 'hex'), 'ascii')  # type: ignore
@@ -130,7 +130,7 @@ class BaseKey(ByteString, collections.Hashable):
         return self.__int__()
 
     def __hex__(self):
-        # type: () -> Text
+        # type: () -> str
         if sys.version_info[0] == 2:
             return codecs.encode(self.to_hex(), 'ascii')
         else:
@@ -292,7 +292,7 @@ class Signature(ByteString, BackendProxied):
         return (self.v, self.r, self.s)
 
     def to_hex(self):
-        # type: () -> Text
+        # type: () -> str
         # Need the 'type: ignore' comment below because of
         # https://github.com/python/typeshed/issues/300
         return '0x' + codecs.decode(codecs.encode(self.to_bytes(), 'hex'), 'ascii')  # type: ignore
@@ -357,7 +357,7 @@ class Signature(ByteString, BackendProxied):
         return self.__int__()
 
     def __hex__(self):
-        # type: () -> Text
+        # type: () -> str
         if sys.version_info[0] == 2:
             return codecs.encode(self.to_hex(), 'ascii')
         else:
